@@ -15,12 +15,12 @@ Prerequisites:
 
 - [Pi](https://pi.dev)
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) available as `claude`
-- `tmux` for `backend: "tmux"`
+- `tmux` for the default `backend: "tmux"`. If you do not use tmux, set `backend: "print"`.
 
 Install from GitHub:
 
 ```bash
-pi install git:github.com/liamvinberg/pi-claude-agent@v0.1.0
+pi install git:github.com/liamvinberg/pi-claude-agent@v0.1.1
 ```
 
 For a local checkout:
@@ -110,12 +110,12 @@ Tmux options:
 - `output_dir` — artifact directory. Default: a temporary `pi-claude-agent-*` directory.
 - `tmux_session_name` — optional name for detached sessions.
 
-Environment defaults:
+Optional environment overrides:
 
 ```bash
 export PI_CLAUDE_COMMAND=claude
-export PI_CLAUDE_AGENT_BACKEND=tmux
-export PI_CLAUDE_AGENT_TMUX_DISPLAY=detached
+export PI_CLAUDE_AGENT_BACKEND=print
+export PI_CLAUDE_AGENT_TMUX_DISPLAY=pane
 export PI_CLAUDE_AGENT_MODEL=sonnet
 export PI_CLAUDE_AGENT_TIMEOUT_SECONDS=600
 ```
@@ -131,7 +131,7 @@ Tmux runs write files such as:
 - `hook-events.jsonl` — Claude hook events
 - `tmux-capture.txt` — recent tmux pane capture
 
-Pi returns the artifact directory path in the tool result.
+Pi returns the artifact directory path in the tool result. Artifacts may contain prompts, local paths, Claude transcript paths, and hook event metadata. Treat them as local debugging output, not sanitized logs.
 
 ## Security
 

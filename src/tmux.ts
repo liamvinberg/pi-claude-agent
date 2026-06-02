@@ -14,12 +14,23 @@ export interface VisiblePane {
 }
 
 export async function tmux(args: string[], signal?: AbortSignal): Promise<string> {
-	const { stdout } = await execFileAsync("tmux", args, {
-		encoding: "utf8",
-		maxBuffer: TMUX_MAX_BUFFER,
-		signal,
-	});
-	return stdout;
+	try {
+		const { stdout } = await execFileAsync("tmux", args, {
+			encoding: "utf8",
+			maxBuffer: TMUX_MAX_BUFFER,
+			signal,
+		});
+		return stdout;
+	} catch (error) {
+		if (isMissingCommandError(error)) {
+			throw new Error('backend="tmux" requires tmux to be installed. Install tmux or set backend="print".');
+		}
+		throw error;
+	}
+}
+
+function isMissingCommandError(error: unknown): error is NodeJS.ErrnoException {
+	return error instanceof Error && "code" in error && error.code === "ENOENT";
 }
 
 export async function createVisibleTmuxPane(
