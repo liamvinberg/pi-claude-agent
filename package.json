@@ -1,0 +1,51 @@
+{
+	"name": "pi-claude-agent",
+	"version": "0.1.0",
+	"description": "Pi extension that delegates tasks to the local Claude Code CLI with tmux sessions and inspectable artifacts.",
+	"type": "module",
+	"keywords": [
+		"pi-package",
+		"pi",
+		"pi-coding-agent",
+		"claude",
+		"claude-code",
+		"extension"
+	],
+	"license": "MIT",
+	"author": "Liam Vinberg",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/liamvinberg/pi-claude-agent.git"
+	},
+	"bugs": {
+		"url": "https://github.com/liamvinberg/pi-claude-agent/issues"
+	},
+	"homepage": "https://github.com/liamvinberg/pi-claude-agent#readme",
+	"files": [
+		"src/**/*.ts",
+		"README.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"check": "tsc --noEmit && biome check .",
+		"format": "biome format --write ."
+	},
+	"pi": {
+		"extensions": [
+			"./src/index.ts"
+		]
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-ai": "*",
+		"@earendil-works/pi-coding-agent": "*",
+		"@earendil-works/pi-tui": "*"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.3.5",
+		"@earendil-works/pi-ai": "0.78.0",
+		"@earendil-works/pi-coding-agent": "0.78.0",
+		"@earendil-works/pi-tui": "0.78.0",
+		"@types/node": "25.9.1",
+		"typescript": "5.9.3"
+	}
+}
