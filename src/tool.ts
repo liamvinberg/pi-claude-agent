@@ -90,11 +90,11 @@ export const claudeAgentTool = defineTool({
 	description:
 		"Delegate work to the local Claude Code CLI. The tmux backend runs interactive Claude in the same cwd, records artifacts, and can run hidden or in a visible tmux pane.",
 	promptSnippet:
-		"Use claude_agent to delegate a task to local Claude Code. Prefer backend=tmux for interactive Claude with artifacts; set tmux_display=pane when the user wants to watch it.",
+		"Use claude_agent only when the user explicitly asks to delegate to Claude Code or grants permission after you ask.",
 	promptGuidelines: [
-		"Use claude_agent when a separate Claude Code perspective or isolated context is useful.",
-		"Use backend=tmux for interactive Claude with inspectable artifacts.",
-		"Use tmux_display=pane only when the user wants a visible split. Keep tmux_display=detached for hidden delegation.",
+		"Do not use claude_agent proactively. Use claude_agent only when the user explicitly asks to delegate to Claude Code/another agent, or after asking for and receiving permission.",
+		"When the user permits claude_agent, prefer backend=tmux for interactive Claude with inspectable artifacts.",
+		"Use tmux_display=pane only when the user wants a visible split. Keep tmux_display=detached for permitted hidden delegation.",
 		"Set autoclose=false when the user wants to inspect the tmux pane or session after completion.",
 		"Pass a prior [claude_session_id: ...] as resume_session_id when the follow-up should preserve that Claude conversation.",
 		"Use mcp_config only for generic Claude MCP configuration; this extension has no built-in MCP profiles.",

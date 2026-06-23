@@ -20,7 +20,7 @@ Prerequisites:
 Install from GitHub:
 
 ```bash
-pi install git:github.com/liamvinberg/pi-claude-agent@v0.1.1
+pi install git:github.com/liamvinberg/pi-claude-agent@v0.1.2
 ```
 
 For a local checkout:
@@ -30,6 +30,10 @@ pi install /path/to/pi-claude-agent
 ```
 
 ## Usage
+
+`claude_agent` is opt-in delegation. Pi should not invoke it proactively just
+because another model might be useful; use it when you explicitly ask for a
+Claude/agent handoff, or after Pi asks and you grant permission.
 
 Ask Pi to delegate to Claude:
 
@@ -136,6 +140,8 @@ Pi returns the artifact directory path in the tool result. Artifacts may contain
 ## Security
 
 This extension runs your local `claude` CLI with your local Claude credentials and filesystem access. The default `sandbox_mode: "read-only"` limits Claude's built-in tools, but it is not an OS sandbox. Review requested permissions before enabling write tools or bypass permissions.
+
+The tool prompt tells Pi not to call `claude_agent` proactively. Delegation should be explicit: either you ask for it, or Pi asks first and you approve.
 
 ## License
 
